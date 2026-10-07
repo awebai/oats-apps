@@ -2,4 +2,5 @@ schemaVersion: 2
 name: oats-apps-expert
 description: "Expert in oats.apps: the Folio and Library guidance capabilities, their released contracts and package PRs."
 work: worktree
-# Core and knowledge capabilities come from workspace defaults.
+# Core comes from workspace defaults. Knowledge is deliberately unbound in v1.
+knowledge: none

@@ -24,8 +24,9 @@ snapshots, both exports, containment and the documentation-only surface. CI runs
 validation, syntax checks and scaffold tests. Build content only after both
 maintainers approve this scaffold; one developer owns each capability directory.
 The member soul `oats-apps-expert` follows the package-expert convention and is
-separate from the versioned distribution payload. Its knowledge ownership must
-be assigned through workspace governance, not fabricated by this repository.
+separate from the versioned distribution payload. It explicitly selects `knowledge: none` in v1. Its OKF owner/node and soul
+binding come together in later reviewed knowledge-base and soul changes, with
+both maintainer verdicts; no placeholder owner or empty node is shipped.
 
 Maintainers publish the reviewed v1.0.0 tag after content acceptance; catalog,
 generated mirrors and clean-room smoke integration follow in a separate OATS PR.

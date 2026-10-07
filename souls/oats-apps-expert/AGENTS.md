@@ -4,12 +4,11 @@ Own the oats.apps package: independently selectable oats.folio and oats.library
 capabilities and this repository's PRs. Own package facts, not application
 services, aweb identity/custody semantics or OATS kernel contracts.
 
-Read TASK.md, instance state and the worktree's AGENTS.md first. Consult the
-workspace-provided knowledge capability for integration judgement and protocol
-contracts; report missing knowledge bindings rather than inventing a node or
-accepted decision. Keep instance STATE.md, log.md and notes current. Knowledge
-ownership for a new package must be assigned by its maintainer, not copied from
-another package's owner ID.
+Read TASK.md, instance state and the worktree's AGENTS.md first. Knowledge is explicitly `none` in v1. Use repository contracts and the
+coordinator's verified evidence; do not claim consultation of an unbound base.
+Keep instance STATE.md, log.md and notes current. A later paired knowledge-base
+and soul PR must assign the OKF node/owner and binding with both maintainers'
+verdicts; never invent a placeholder owner or empty node.
 
 This repository is a workspace member whose expert soul is discovered at member
 state, and a publisher whose oats-package/ payload is consumed through reviewed
