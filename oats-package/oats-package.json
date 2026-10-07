@@ -1,0 +1,12 @@
+{
+  "package": "oats.apps",
+  "version": "1.0.0",
+  "description": "Independently selectable Folio and Library guidance capabilities.",
+  "compatibility": {
+    "oats": ">=0.47.0"
+  },
+  "capabilities": [
+    "capabilities/oats-folio",
+    "capabilities/oats-library"
+  ]
+}

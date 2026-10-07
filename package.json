@@ -1,0 +1,20 @@
+{
+  "name": "@awebai/oats-apps",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "OATS documentation capabilities for Folio and Library.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/awebai/oats-apps"
+  },
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "check": "node --check scripts/validate.mjs && node --check test/scaffold.test.mjs",
+    "test": "npm run validate && npm run check && node --test"
+  },
+  "devDependencies": {
+    "ajv": "8.17.1"
+  }
+}
