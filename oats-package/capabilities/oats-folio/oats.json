@@ -1,0 +1,14 @@
+{
+  "capability": "oats.folio",
+  "version": "1.0.0",
+  "description": "Folio guidance capability scaffold; curated content is pending.",
+  "compatibility": {
+    "oats": ">=0.47.0"
+  },
+  "requires": [
+    {
+      "command": "aw",
+      "why": "App workflows require aw >=1.36.26 and resident approval; command presence alone does not verify version or delegation."
+    }
+  ]
+}
