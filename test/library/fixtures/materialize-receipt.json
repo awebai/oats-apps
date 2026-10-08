@@ -1,0 +1,34 @@
+{
+  "kernel": "0.47.0",
+  "kernel_source": "e6e75ed8ba5a0a07a4b3e26fc627cac9064c730b",
+  "package": "oats.apps@1.0.0 scratch fixture tag only",
+  "locked_commit": "f12222c4c11e27be86931f48553edb5d3fbc35f7",
+  "locked_integrity": "sha256-12c2f35020cec6823afbb81ac3cbdb34d1e52b91435e6912d83c53cb6ad814ac",
+  "harnesses": [
+    {
+      "harness": "claude",
+      "preview": "PASS",
+      "no_launch_spawn": "PASS",
+      "module_bytes": "PASS",
+      "skill_bytes": "PASS",
+      "inject": "PASS"
+    },
+    {
+      "harness": "pi",
+      "preview": "PASS",
+      "no_launch_spawn": "PASS",
+      "module_bytes": "PASS",
+      "skill_bytes": "PASS",
+      "inject": "PASS"
+    },
+    {
+      "harness": "codex",
+      "preview": "PASS",
+      "no_launch_spawn": "PASS",
+      "module_bytes": "PASS",
+      "skill_bytes": "PASS",
+      "inject": "PASS"
+    }
+  ],
+  "limitations": "No launches, real provider hooks or app operations. Messaging slot is inert fixture.messaging, not oats.aweb. Only Library selected; combined content CI remains parent-owned. Working-tree rehearsal is not published adoption."
+}

@@ -1,0 +1,449 @@
+{
+  "version": "aw 1.36.26\n  commit: 8d70c50693ce10228ea341f68bc7ebc54a55fa9b (github.com/awebai/aw)\n  built:  2026-10-07T21:36:13Z",
+  "binary_sha256": "efd6d3d54b1b746052e35129c269b0394810238a71576032c73b3dbfd6dc6384",
+  "manifest_sha256": "0019130d90bbbc61fde49c144b4f883eabac837889b0c69f515d206b35552329",
+  "source_commit": "8d70c50693ce10228ea341f68bc7ebc54a55fa9b",
+  "upstream_commit": "873ed2bf5cdad65a20577fcd726f167eb9f5ebb4",
+  "fixture": "origin-only loopback rewrite; synthetic LOCAL signing identity; no service authority tested",
+  "tools": [
+    {
+      "name": "list-blueprints",
+      "help": "PASS exact original manifest",
+      "help_sha256": "19bac6ae5720e3a48b62d3559236bb462a9ced7e99ac50808ec5a6ec914f5aea",
+      "dispatcher": "PASS",
+      "method": "GET",
+      "auth": "none",
+      "parameters": [
+        {
+          "in": "query",
+          "name": "tags"
+        }
+      ]
+    },
+    {
+      "name": "get-blueprint",
+      "help": "PASS exact original manifest",
+      "help_sha256": "40dd817431abbda667c1af197aad988cf894ca2954705f40998ca46fc1f8d335",
+      "dispatcher": "PASS",
+      "method": "GET",
+      "auth": "none",
+      "parameters": [
+        {
+          "in": "path",
+          "name": "blueprint_ref"
+        }
+      ]
+    },
+    {
+      "name": "get-profile",
+      "help": "PASS exact original manifest",
+      "help_sha256": "221152bb4fadc331d120976366be83190090c23898276346583cdd0822fb3084",
+      "dispatcher": "PASS",
+      "method": "GET",
+      "auth": "none",
+      "parameters": [
+        {
+          "in": "path",
+          "name": "blueprint_ref"
+        },
+        {
+          "in": "path",
+          "name": "profile_ref"
+        }
+      ]
+    },
+    {
+      "name": "publish-blueprint",
+      "help": "PASS exact original manifest",
+      "help_sha256": "09d61201d6c0924ecd67ee00ec849760867f40753c160afa43706223bf264c68",
+      "dispatcher": "PASS",
+      "method": "POST",
+      "auth": "team-cert",
+      "parameters": [
+        {
+          "in": "body",
+          "name": "files"
+        },
+        {
+          "in": "body",
+          "name": "schema"
+        }
+      ]
+    },
+    {
+      "name": "register",
+      "help": "PASS exact original manifest",
+      "help_sha256": "21eb820db539c7c1648e30ac3b779e5efdcc0cf5a98ef162414e805c14733c9b",
+      "dispatcher": "PASS",
+      "method": "POST",
+      "auth": "team-cert",
+      "parameters": [
+        {
+          "in": "body",
+          "name": "owner"
+        },
+        {
+          "in": "body",
+          "name": "display_name"
+        }
+      ]
+    },
+    {
+      "name": "create-shelf-profile",
+      "help": "PASS exact original manifest",
+      "help_sha256": "d0dd1cb23bad7c0ee5d7e752d5162f2369d3657d551cef5e9b2badcef6be96cf",
+      "dispatcher": "PASS",
+      "method": "POST",
+      "auth": "team-cert",
+      "parameters": [
+        {
+          "in": "body",
+          "name": "files"
+        },
+        {
+          "in": "body",
+          "name": "tags"
+        }
+      ]
+    },
+    {
+      "name": "shelf-version",
+      "help": "PASS exact original manifest",
+      "help_sha256": "0186a1f1574b060e5a5a82c428eeb420117de0113e92ffd4bddc5c1b9c252c25",
+      "dispatcher": "PASS",
+      "method": "POST",
+      "auth": "team-cert",
+      "parameters": [
+        {
+          "in": "path",
+          "name": "profile_ref"
+        },
+        {
+          "in": "body",
+          "name": "files"
+        }
+      ]
+    },
+    {
+      "name": "update-from-source",
+      "help": "PASS exact original manifest",
+      "help_sha256": "31fe339703142a9af798a530bf0a99322854016b547c63cfb841009c70ffa363",
+      "dispatcher": "PASS",
+      "method": "POST",
+      "auth": "team-cert",
+      "parameters": [
+        {
+          "in": "path",
+          "name": "profile_ref"
+        },
+        {
+          "in": "body",
+          "name": "target_version"
+        },
+        {
+          "in": "body",
+          "name": "source_blueprint_version"
+        }
+      ]
+    },
+    {
+      "name": "import-to-shelf",
+      "help": "PASS exact original manifest",
+      "help_sha256": "0fd3c86b5b4c6acd4616e06c565989acc490c1341af2f4b026fba96237211d33",
+      "dispatcher": "PASS",
+      "method": "POST",
+      "auth": "team-cert",
+      "parameters": [
+        {
+          "in": "body",
+          "name": "source_blueprint_ref"
+        },
+        {
+          "in": "body",
+          "name": "source_blueprint_version"
+        },
+        {
+          "in": "body",
+          "name": "profile_ref"
+        },
+        {
+          "in": "body",
+          "name": "tags"
+        }
+      ]
+    },
+    {
+      "name": "publish-profile",
+      "help": "PASS exact original manifest",
+      "help_sha256": "da4abc9097609409ba34ffdd694d4a79b48c0182e541a530ee464f3c57209e9d",
+      "dispatcher": "PASS",
+      "method": "POST",
+      "auth": "team-cert",
+      "parameters": [
+        {
+          "in": "path",
+          "name": "profile_ref"
+        },
+        {
+          "in": "body",
+          "name": "profile_version"
+        },
+        {
+          "in": "body",
+          "name": "blueprint_version"
+        },
+        {
+          "in": "body",
+          "name": "target_blueprint_ref"
+        },
+        {
+          "in": "body",
+          "name": "new_blueprint"
+        }
+      ]
+    },
+    {
+      "name": "set-profile-tags",
+      "help": "PASS exact original manifest",
+      "help_sha256": "f7b7eba6370056341fb102917ca7f003f929ea18f8cfe39ad080149acac60d3b",
+      "dispatcher": "PASS",
+      "method": "PUT",
+      "auth": "team-cert",
+      "parameters": [
+        {
+          "in": "path",
+          "name": "profile_ref"
+        },
+        {
+          "in": "body",
+          "name": "tags"
+        }
+      ]
+    },
+    {
+      "name": "set-blueprint-tags",
+      "help": "PASS exact original manifest",
+      "help_sha256": "ba14d6729786af65fc66bde8ae58fe6d8396a6deb00c4a234abd0df7d666efad",
+      "dispatcher": "PASS",
+      "method": "PUT",
+      "auth": "team-cert",
+      "parameters": [
+        {
+          "in": "path",
+          "name": "blueprint_ref"
+        },
+        {
+          "in": "body",
+          "name": "tags"
+        }
+      ]
+    },
+    {
+      "name": "bind",
+      "help": "PASS exact original manifest",
+      "help_sha256": "76f9e36b6d902e1a13a5afc257d2d1864b5eefe8f6a25a77e14444c2e9de4e31",
+      "dispatcher": "PASS",
+      "method": "POST",
+      "auth": "team-cert",
+      "parameters": [
+        {
+          "in": "path",
+          "name": "agent_id"
+        },
+        {
+          "in": "body",
+          "name": "profile_ref"
+        },
+        {
+          "in": "body",
+          "name": "profile_version"
+        },
+        {
+          "in": "body",
+          "name": "profile_digest"
+        },
+        {
+          "in": "body",
+          "name": "source_blueprint_ref"
+        }
+      ]
+    },
+    {
+      "name": "get-binding",
+      "help": "PASS exact original manifest",
+      "help_sha256": "be27a1fede296c08285c1c48f3fcc21a51903ccb4f1009d48b5efe509abd32bd",
+      "dispatcher": "PASS",
+      "method": "GET",
+      "auth": "team-cert",
+      "parameters": [
+        {
+          "in": "path",
+          "name": "agent_id"
+        }
+      ]
+    },
+    {
+      "name": "shelf",
+      "help": "PASS exact original manifest",
+      "help_sha256": "2e60eca3d8e0b3d7663c300c83d8e2074f3f6f385771aea869a1d954c615380c",
+      "dispatcher": "PASS",
+      "method": "GET",
+      "auth": "team-cert",
+      "parameters": []
+    },
+    {
+      "name": "materialize",
+      "help": "PASS exact original manifest",
+      "help_sha256": "8c6782a635cad8cbca0faad68e59bfe8fbfd40b4bf09b2a7c17340962668cff4",
+      "dispatcher": "PASS",
+      "method": "POST",
+      "auth": "team-cert",
+      "parameters": [
+        {
+          "in": "body",
+          "name": "agent_id"
+        },
+        {
+          "in": "body",
+          "name": "profile_ref"
+        },
+        {
+          "in": "body",
+          "name": "runtime_kind"
+        },
+        {
+          "in": "body",
+          "name": "target"
+        }
+      ]
+    },
+    {
+      "name": "propose",
+      "help": "PASS exact original manifest",
+      "help_sha256": "e9d945aa9f22bf16f3e3d4f63a6f025b71f78761b5ee4dce11c9c37b113239e2",
+      "dispatcher": "PASS",
+      "method": "POST",
+      "auth": "team-cert",
+      "parameters": [
+        {
+          "in": "body",
+          "name": "target"
+        },
+        {
+          "in": "body",
+          "name": "profile_ref"
+        },
+        {
+          "in": "body",
+          "name": "content"
+        },
+        {
+          "in": "body",
+          "name": "summary"
+        },
+        {
+          "in": "body",
+          "name": "rationale"
+        }
+      ]
+    },
+    {
+      "name": "proposals",
+      "help": "PASS exact original manifest",
+      "help_sha256": "1a4c0950e74e01c8be225e82e76c4840f5680e308c46139c79ce18ec46c0720b",
+      "dispatcher": "PASS",
+      "method": "GET",
+      "auth": "team-cert",
+      "parameters": []
+    },
+    {
+      "name": "approve",
+      "help": "PASS exact original manifest",
+      "help_sha256": "9ea4b0a571fd2e939434605a3f8d7e64e2e83c8a791017e3c16949c2b18b049b",
+      "dispatcher": "PASS",
+      "method": "POST",
+      "auth": "team-cert",
+      "parameters": [
+        {
+          "in": "path",
+          "name": "proposal_id"
+        }
+      ]
+    },
+    {
+      "name": "reject",
+      "help": "PASS exact original manifest",
+      "help_sha256": "4611028d58b24879038aced8eb2a8eea38d33f55ab9d8a8048ec38c791eda5a6",
+      "dispatcher": "PASS",
+      "method": "POST",
+      "auth": "team-cert",
+      "parameters": [
+        {
+          "in": "path",
+          "name": "proposal_id"
+        }
+      ]
+    },
+    {
+      "name": "get-shelf-profile",
+      "help": "PASS exact original manifest",
+      "help_sha256": "5b2098da17e5c0c0d2011565c5413cb7803a82fc8d58ba757d6a6fab75215ce6",
+      "dispatcher": "PASS",
+      "method": "GET",
+      "auth": "team-cert",
+      "parameters": [
+        {
+          "in": "path",
+          "name": "profile_ref"
+        },
+        {
+          "in": "query",
+          "name": "include"
+        }
+      ]
+    },
+    {
+      "name": "delete-blueprint",
+      "help": "PASS exact original manifest",
+      "help_sha256": "1dbca44a791738762b2898cbf332b5ba4bc32c17f26c7b2b472c9bcb9a45e45c",
+      "dispatcher": "PASS",
+      "method": "DELETE",
+      "auth": "team-cert",
+      "parameters": [
+        {
+          "in": "path",
+          "name": "blueprint_ref"
+        }
+      ]
+    },
+    {
+      "name": "delete-shelf-profile",
+      "help": "PASS exact original manifest",
+      "help_sha256": "373263ebffbd7caabf46dd5c6620276822d1f13ed29baad541114cab5006cf3d",
+      "dispatcher": "PASS",
+      "method": "DELETE",
+      "auth": "team-cert",
+      "parameters": [
+        {
+          "in": "path",
+          "name": "profile_ref"
+        }
+      ]
+    }
+  ],
+  "errors": {
+    "positional": "unexpected positional argument \"fixture\"",
+    "hyphen_alias": "unknown flag --blueprint-ref for library get-blueprint; valid flags: --blueprint_ref, --body-file",
+    "missing_value": "missing value for --blueprint_ref",
+    "raw_markdown": "--body-file for json-mode verbs must contain a single JSON object: invalid character '#' looking for beginning of value",
+    "array_body": "--body-file for json-mode verbs must contain a JSON object",
+    "trailing_json": "--body-file for json-mode verbs must contain a single JSON object: unexpected trailing data after JSON document",
+    "invalid_array_flag": "body param files: expected array (JSON): invalid character 'o' in literal null (expecting 'u')",
+    "invalid_object_flag": "body param content: expected object (JSON): json: cannot unmarshal array into Go value of type map[string]interface {}"
+  },
+  "body_flag_override": "PASS",
+  "array_body_flag": "JSON array",
+  "array_query": "Repeated --tags yields repeated query keys; JSON-looking value is a literal query string, not parsed",
+  "required_body": "publish-blueprint omitting files and schema reached loopback with empty body; only these omissions exercised; service validation NOT RUN",
+  "raw_body": "No Library raw-mode tool; Markdown JSON body refusal verified"
+}
