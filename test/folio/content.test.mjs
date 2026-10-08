@@ -48,3 +48,12 @@ test('curated contract matches every manifest tool, path, location, type, and re
     assert.ok(tool.params.every(p => ['path', 'body'].includes(p.in)));
   }
 });
+
+test('empty inventory and explicit exclusion stay separate authority observations', () => {
+  const rows = read(join(skillRoot, 'references/seat-and-evidence.md')).split('\n').filter(line => line.startsWith('| ')).map(line => line.split('|').slice(1, -1).map(s => s.trim()));
+  const row = observation => rows.find(cells => cells[0] === observation);
+  assert.deepEqual(row('Valid matching empty inventory'), ['Valid matching empty inventory', 'None included', 'Unknown']);
+  assert.deepEqual(row('Matching mint output lists `folio` in `skipped_apps`'), ['Matching mint output lists `folio` in `skipped_apps`', 'Excluded at mint', 'No for that exclusion; other authority unproven']);
+  const emptyCase = JSON.parse(read(new URL('./adversarial-cases.json', import.meta.url))).find(c => /no tools were included/.test(c.request));
+  assert.doesNotMatch(emptyCase.expected, /no for/i);
+});

@@ -30,9 +30,11 @@ resolve a missing prerequisite; do not mint or renew as an authority probe.
 4. Report current delegation as yes/no/unknown separately. Released aw 1.36.26 has
    no worker-local read-only app inventory/freshness query: aggregate **delegated now
    = unknown** unless a supported current authority read proves it. A known expiration
-   or a validated matching exclusion can establish **no for that specific condition**;
-   do not turn an unrelated missing tool into a blanket denial. Historical inclusion
-   does not prove current revocation status, freshness or service availability.
+   or a validated matching exclusion (an app listed in `skipped_apps` of mint output for
+   this exact grant and team) can establish **no for that specific condition**. Empty
+   inventory is not an exclusion; do not turn an unrelated missing tool into a blanket
+   denial. Historical inclusion does not prove current revocation status, freshness or
+   service availability.
 5. For a resident, report delegation **unknown / not-a-grant**, and discuss resident
    approval separately. A past install receipt with `approved: true` is historical;
    no public command in this pinned contract lists the resident approval catalog.
@@ -44,7 +46,9 @@ into resident custody: same-OS-user filesystem access is not authorization.
 
 The resident-side snapshot is `grants/<grant-id>/app-tools.json`: version 1, `grant_id`,
 `team_id`, and an `apps` map containing full manifest tool definitions. It is not mint
-output's `tools: string[]` and is not copied to the worker. Resident approval records
+output's `tools: string[]` and is not copied to the worker. Mint output's `skipped_apps`
+lists `{app_id, code}` for each approved app excluded from that grant; it is not stored
+in the snapshot. Resident approval records
 are resident-local `app-approvals.json`; these format notes do not authorize direct
 file reads. Never read signing keys as part of assessment.
 
@@ -58,7 +62,8 @@ JSON; agent-facing reports contain identifiers/counts/codes only.
 | Observation | Historical inclusion at mint | Current delegation |
 |---|---|---|
 | Valid matching snapshot includes requested tool | Included | Unknown without supported current read |
-| Valid matching empty inventory | None included | No for matching mint exclusion; other authority unproven |
+| Valid matching empty inventory | None included | Unknown |
+| Matching mint output lists `folio` in `skipped_apps` | Excluded at mint | No for that exclusion; other authority unproven |
 | Missing/legacy/malformed/partial or wrong grant/team | Unavailable | Unknown |
 | Valid matching snapshot, grant known expired | Included (historical) | No for expiration |
 | Host plugin installed; past approval receipt only | Unavailable for this grant | Unknown |
