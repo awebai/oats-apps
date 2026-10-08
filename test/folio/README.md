@@ -55,8 +55,11 @@ FOLIO_OATS_ROOT=/absolute/path/to/unpacked/oats node --test test/folio/materiali
 
 The suite drives the public CLI through onboarding and `spawn --no-launch`, using a
 disposable local Git fixture and isolated deployment/cache/home. Git permits file
-transport only. All three harness declarations (Claude, Pi, Codex) must produce exact
-Folio inject/skill/reference bytes. It checks a member-based Folio-only composition;
+transport only. PATH holds exit-97 tripwire stubs for `aw`, `claude`, `pi`, `codex` and
+`tmux`, then only the node directory, `/usr/bin` and `/bin`; the test refuses to run if a
+real one of those is reachable there, so it needs no host harness install. All three
+harness declarations (Claude, Pi, Codex) must produce exact Folio inject/skill/reference
+bytes. It checks a member-based Folio-only composition;
 core and all provider slots are disabled, so no native identity effects are possible.
 It does not claim installed `oats.aweb`, real harness launch, published package adoption,
 or the required combined Folio+Library package proof. Those are parent integration gates.
