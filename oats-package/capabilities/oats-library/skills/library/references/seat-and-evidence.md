@@ -11,8 +11,9 @@ readiness probe. An anonymous read is useful only for the requested catalog task
 
 A LOCAL or GLOBAL resident is not a delegated worker. An explicitly authorized
 resident operator installs/approves once from its own selected home, following
-the native/provider instructions. Plugin bytes are host-local; approval belongs
-to that resident. The past `approved:true` install receipt is not a current read.
+the native/provider instructions. Plugin bytes are host-local; approvals are
+resident-local and belong to that resident. The past `approved:true` install
+receipt is not a current read.
 There is no public aw 1.36.26 command listing resident app approvals.
 
 A successful next mint/re-mint incorporates actual valid resident approvals.
@@ -21,9 +22,8 @@ refresh it. Removing a resident approval affects future mints, not existing
 grants. This capability never mints, renews, installs or changes selectors.
 Do not infer automatic revocation of an existing grant from resident removal.
 
-The resident-side `grants/<grant-id>/app-tools.json` snapshot has `version:1`,
-`grant_id`, `team_id`, and an `apps` map containing full manifest tool definitions.
-It is not the mint output's `tools:string[]` and is not copied to the worker.
+The resident keeps its own snapshot of the tools approved at mint; it is not
+the mint output's per-app tool list and is not copied to the worker.
 Mint output's `skipped_apps` lists `{app_id, code}` for each approved app
 excluded from that grant; it is not stored in the snapshot.
 Grant workers must not walk into resident custody files, even under the same
