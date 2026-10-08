@@ -73,6 +73,10 @@ test('manual security/evidence cases are anchored in controlling prose, not exec
   for (const c of cases) assert.ok(readFileSync(join(refs, c.reference), 'utf8').includes(c.passage), `${c.id}: absent controlling passage`);
   for (const id of ['unsupported', 'missing', 'malformed', 'mismatch', 'empty', 'empty-not-exclusion', 'partial', 'full', 'transport', 'anonymous']) assert.match(cases.find(x => x.id === id).expect, /unknown/);
 });
+test('resident custody file layout is not described', () => {
+  assert.doesNotMatch(prose, /app-tools\.json|app-approvals\.json|grants\/<grant-id>|tools:\s*string\[\]/);
+  assert.match(prose, /even under the same\s+OS user/);
+});
 test('no automatic installation/mint/selector-change recipes or raw discovery instructions are composed', () => {
   assert.doesNotMatch(prose, /aw\s+(?:plugin\s+(?:install|update|remove)|id\s+grant\s+(?:create|mint)|team\s+switch)\b/);
   assert.doesNotMatch(prose, /(?:unset|export)\s+(?:AWEB|AW)_/);
