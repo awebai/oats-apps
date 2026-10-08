@@ -71,7 +71,7 @@ test('manual security/evidence cases are anchored in controlling prose, not exec
   const cases = JSON.parse(readFileSync(new URL('fixtures/review-cases.json', import.meta.url)));
   assert.equal(new Set(cases.map(x => x.id)).size, cases.length);
   for (const c of cases) assert.ok(readFileSync(join(refs, c.reference), 'utf8').includes(c.passage), `${c.id}: absent controlling passage`);
-  for (const id of ['unsupported', 'missing', 'malformed', 'mismatch', 'empty', 'partial', 'full', 'transport', 'anonymous']) assert.match(cases.find(x => x.id === id).expect, /unknown/);
+  for (const id of ['unsupported', 'missing', 'malformed', 'mismatch', 'empty', 'empty-not-exclusion', 'partial', 'full', 'transport', 'anonymous']) assert.match(cases.find(x => x.id === id).expect, /unknown/);
 });
 test('no automatic installation/mint/selector-change recipes or raw discovery instructions are composed', () => {
   assert.doesNotMatch(prose, /aw\s+(?:plugin\s+(?:install|update|remove)|id\s+grant\s+(?:create|mint)|team\s+switch)\b/);

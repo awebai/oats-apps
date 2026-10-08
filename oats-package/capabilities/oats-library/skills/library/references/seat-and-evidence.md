@@ -24,6 +24,8 @@ Do not infer automatic revocation of an existing grant from resident removal.
 The resident-side `grants/<grant-id>/app-tools.json` snapshot has `version:1`,
 `grant_id`, `team_id`, and an `apps` map containing full manifest tool definitions.
 It is not the mint output's `tools:string[]` and is not copied to the worker.
+Mint output's `skipped_apps` lists `{app_id, code}` for each approved app
+excluded from that grant; it is not stored in the snapshot.
 Grant workers must not walk into resident custody files, even under the same
 OS user. `grant.yaml` has no app snapshot and cannot prove current revocation or
 freshness. Resident grant show/list is registry metadata, not app inventory.
@@ -37,8 +39,9 @@ Never read signing keys to assess delegation.
 2. In aw 1.36.26 there is **no worker-local read-only inventory/freshness query**.
    Therefore “delegated now” remains **unknown** unless a separately supported
    current authority read establishes it. No current positive test is supplied
-   by this capability. A known expiration or matching explicit exclusion can
-   establish **no for that condition**; it does not establish other tool rights.
+   by this capability. A known expiration, or a validated matching exclusion (an
+   app listed in `skipped_apps` of mint output for this exact grant and team),
+   can establish **no for that condition**; it does not establish other rights.
 3. Report historical “included at mint” separately, and only for validated
    metadata tied to this exact selected grant ID AND team ID. Use public
    `oats inspect --home <selected-home> --json` only when the captured
@@ -47,7 +50,9 @@ Never read signing keys to assess delegation.
    that support. Unsupported captures return historical **unavailable**.
 4. Validate the supported record's version, shape, identity/team match and tool
    inventory. Do not reinterpret arbitrary JSON as the resident snapshot schema.
-   A valid empty inventory means **none included**. Missing, legacy, malformed
+   A valid empty inventory means **none included**.
+   Empty inventory is not an exclusion; only a matching `skipped_apps` entry is.
+   Missing, legacy, malformed
    or mismatched metadata means **unavailable**. A valid partial inventory can
    establish only the listed tools' historical inclusion, not the missing tools'
    current rights or a whole-app grant. The three anonymous catalog tools are
@@ -67,7 +72,7 @@ Never read signing keys to assess delegation.
 | Valid matching partial inventory | listed tools only | unknown |
 | Valid matching full inventory | listed tools only | unknown |
 | Known expired selected grant | independently validated history, if any | no: expired |
-| Explicit matching exclusion for a tool | independently validated history, if any | no for that tool/condition |
+| Matching mint output for this exact grant and team lists `library` in `skipped_apps` | excluded at mint | no for that exclusion; other authority unproven |
 | Transport error or unavailable current read | unchanged validated history, if any | unknown |
 | Anonymous catalog read succeeds | no evidence | unknown |
 | Host plugin list or old approval receipt | no evidence | unknown |
