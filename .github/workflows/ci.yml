@@ -38,8 +38,10 @@ jobs:
           }
           fetch @awebai/aw-linux-x64@1.36.26 sha512-GZQaDCx/t/QhBGqjKtCiKWh2uUAZlWeaNA/PaGljLtbYsN8ZDslG0IGXQsMjgam8sjzdztdljAWXbzcRrtjY3g== "$dir/aw"
           fetch @awebai/oats@0.47.0 sha512-ukh3j5Wtcnsqm5/5BIhq7SX3By5hNRAmKu35HpqPaZhsnQe1gPWs8WVEpXIPkL2fklQud4OozL0WCvxRn9Qa2g== "$dir/oats"
+          # The kernel tarball has no lockfile: yaml and croner are exact, @awebai/pi
+          # floats within ^0.2.1. The suites put exit-97 stubs first on PATH.
           (cd "$dir/oats" && npm install --omit=dev --ignore-scripts --no-audit --no-fund)
-          "$dir/aw/bin/aw" version
+          AW_NO_UPDATE_CHECK=1 "$dir/aw/bin/aw" version
           sha256sum "$dir/aw/bin/aw"
           echo "PINNED_AW=$dir/aw/bin/aw" >> "$GITHUB_ENV"
           echo "PINNED_OATS=$dir/oats/bin/oats.mjs" >> "$GITHUB_ENV"
@@ -49,7 +51,9 @@ jobs:
           FOLIO_AW_BINARY="$PINNED_AW" FOLIO_OATS_ROOT="$(dirname "$(dirname "$PINNED_OATS")")" OATS_APPS_KERNEL="$PINNED_OATS" \
             node --test --test-reporter=spec --test-reporter-destination=stdout --test-reporter=tap --test-reporter-destination="$RUNNER_TEMP/pinned.tap" \
             test/folio/native.test.mjs test/folio/materialization.test.mjs test/package/materialization.test.mjs
-          grep -Eqx '# skip(ped)? 0' "$RUNNER_TEMP/pinned.tap" || { echo "a pinned suite skipped"; exit 1; }
+          for line in '# pass 4' '# fail 0' '# skipped 0'; do
+            grep -qx "$line" "$RUNNER_TEMP/pinned.tap" || { echo "pinned suites: expected '$line'"; exit 1; }
+          done
       - name: Library argv preflight
         run: node test/library/argv-preflight.mjs "$PINNED_AW"
       - name: Library materialization

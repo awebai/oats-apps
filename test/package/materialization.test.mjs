@@ -33,6 +33,7 @@ test('released OATS 0.47.0 composes oats.folio and oats.library from one locked 
     assert.equal(doc.ok, true); return doc.result;
   };
   function sameTree(source, dest) {
+    assert.deepEqual(readdirSync(dest).sort(), readdirSync(source).sort(), dest);
     for (const item of readdirSync(source, { withFileTypes: true })) {
       const a = join(source, item.name), b = join(dest, item.name);
       if (item.isDirectory()) sameTree(a, b); else assert.deepEqual(readFileSync(b), readFileSync(a), b);
@@ -53,7 +54,8 @@ test('released OATS 0.47.0 composes oats.folio and oats.library from one locked 
     write(join(dep, 'oats-local.yaml'), `schemaVersion: 2\nworkspace: ${ref}\n`);
     cli(['sync']);
     const lock = JSON.parse(readFileSync(join(dep, 'oats-lock.json')));
-    assert.equal(lock.lockfileVersion, 3); assert.ok(lock.packages['oats.apps'].commit);
+    assert.equal(lock.lockfileVersion, 3);
+    assert.equal(lock.packages['oats.apps'].commit, git('rev-parse', 'fixture-v1^{commit}'), 'the package is locked at the tagged fixture commit');
     for (const [soul, selected] of Object.entries(souls)) {
       for (const harness of ['claude', 'pi', 'codex']) {
         const args = ['spawn', soul, '--purpose', harness, '--harness', harness, '--no-launch'];
