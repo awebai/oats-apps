@@ -2,7 +2,7 @@
 
 One OATS package with two independently selectable additive capabilities:
 `oats.folio` and `oats.library`. Each teaches an existing aweb app through
-`aw folio …` or `aw library …`. v1.0.0 has not been released yet.
+`aw folio …` or `aw library …`. The current release is v1.0.0.
 
 v1 ships curated injects and skills, with no executable hooks, readiness check
 or slot provider. Composition must select `oats.aweb` separately;
