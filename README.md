@@ -44,9 +44,9 @@ capabilities together, and each alone. The messaging slot there is an inert
 fixture, not `oats.aweb`. No suite launches a harness, runs a provider hook or
 contacts an app.
 The member soul `oats-apps-expert` follows the package-expert convention and is
-separate from the versioned distribution payload. It explicitly selects `knowledge: none` in v1. Its OKF owner/node and soul
-binding come together in later reviewed knowledge-base and soul changes, with
-both maintainer verdicts; no placeholder owner or empty node is shipped.
+separate from the versioned distribution payload. It owns the package-facts node
+`oats/oats-apps-expert` in the central knowledge base; `souls/oats-apps-expert/okf.json`
+declares what it owns and reads.
 
 Maintainers publish the reviewed v1.0.0 tag after content acceptance; catalog,
 generated mirrors and clean-room smoke integration follow in a separate OATS PR.
