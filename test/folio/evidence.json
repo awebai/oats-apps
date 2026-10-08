@@ -1,0 +1,27 @@
+{
+  "aw": {
+    "version": "1.36.26",
+    "public_source_commit": "8d70c50693ce10228ea341f68bc7ebc54a55fa9b",
+    "oss_source_commit": "873ed2bf5cdad65a20577fcd726f167eb9f5ebb4",
+    "binary_platform": "darwin-arm64",
+    "binary_built_at": "2026-10-07T21:36:13Z",
+    "binary_sha256": "efd6d3d54b1b746052e35129c269b0394810238a71576032c73b3dbfd6dc6384",
+    "manifest_sha256": "480b157753e1ecc9cd257daf70a35b97c5943960d69183971c32498b48c313e3",
+    "exact_manifest_help_count": 14,
+    "origin_only_loopback_dispatch_count": 14,
+    "json_override_count": 1,
+    "pre_http_refusal_count": 10,
+    "missing_required_json_fields_reaching_http": ["create.title", "asset-image.data_base64", "asset-video.content_type"],
+    "scope": "real pinned binary, synthetic LOCAL credentials and loopback handler; header presence, not server cryptographic acceptance"
+  },
+  "kernel": {
+    "package": "@awebai/oats",
+    "version": "0.47.0",
+    "npm_tarball_sha1": "aba4dab4e509e3284e842a53838eacae6c5fa274",
+    "npm_integrity": "sha512-ukh3j5Wtcnsqm5/5BIhq7SX3By5hNRAmKu35HpqPaZhsnQe1gPWs8WVEpXIPkL2fklQud4OozL0WCvxRn9Qa2g==",
+    "source_schema_commit": "e6e75ed8ba5a0a07a4b3e26fc627cac9064c730b",
+    "harness_declarations": ["claude", "pi", "codex"],
+    "scope": "real public CLI, local member fixture, no-launch, Folio only, all provider slots disabled"
+  },
+  "not_run": ["combined Folio+Library package materialization (parent gate)", "real oats.aweb composition/provider effects", "live app or account workflow", "service deployment/readiness", "live spawn/retire", "published tag/catalog adoption"]
+}
