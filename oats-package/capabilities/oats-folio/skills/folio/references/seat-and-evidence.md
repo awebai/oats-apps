@@ -44,13 +44,11 @@ not app inventory, and belongs in the resident's authorized context. `grant.yaml
 no app snapshot and does not prove current revocation/freshness. Never walk from a worker
 into resident custody: same-OS-user filesystem access is not authorization.
 
-The resident-side snapshot is `grants/<grant-id>/app-tools.json`: version 1, `grant_id`,
-`team_id`, and an `apps` map containing full manifest tool definitions. It is not mint
-output's `tools: string[]` and is not copied to the worker. Mint output's `skipped_apps`
-lists `{app_id, code}` for each approved app excluded from that grant; it is not stored
-in the snapshot. Resident approval records
-are resident-local `app-approvals.json`; these format notes do not authorize direct
-file reads. Never read signing keys as part of assessment.
+The resident keeps its own snapshot of the tools approved at mint. It is not the mint
+output's per-app tool list and is not copied to the worker. Mint output's `skipped_apps`
+names each approved app excluded from that grant, with a reason code; it is not stored in
+that snapshot. Resident approvals are resident-local. None of this authorizes reading
+resident files. Never read signing keys as part of assessment.
 
 Use public `oats inspect` for captured app inventory only after verifying that the
 actually composed `oats.aweb` version supports that recorded metadata. Planned provider

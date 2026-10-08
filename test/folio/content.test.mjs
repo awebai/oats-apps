@@ -57,3 +57,7 @@ test('empty inventory and explicit exclusion stay separate authority observation
   const emptyCase = JSON.parse(read(new URL('./adversarial-cases.json', import.meta.url))).find(c => /no tools were included/.test(c.request));
   assert.doesNotMatch(emptyCase.expected, /no for/i);
 });
+
+test('payload states custody rules without spelling out resident custody file layout', () => {
+  for (const path of files(capRoot)) assert.doesNotMatch(read(path), /app-tools\.json|app-approvals\.json|grants\/<|tools: string\[\]/, path);
+});
