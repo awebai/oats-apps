@@ -16,3 +16,41 @@ jobs:
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - run: npm test
+  # The pinned suites skip under plain npm test; this job runs each one explicitly
+  # against integrity-checked registry artifacts and fails if any of them skips.
+  pinned-floor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Fetch aw 1.36.26 and released OATS 0.47.0
+        run: |
+          set -euo pipefail
+          dir="$RUNNER_TEMP/pinned"; mkdir -p "$dir/aw" "$dir/oats"
+          fetch() {
+            npm pack "$1" --pack-destination "$dir" --json --ignore-scripts > "$dir/pack.json"
+            node -e 'const [p] = require(process.argv[1]); if (p.integrity !== process.argv[2]) { console.error(`${p.filename}: integrity ${p.integrity}, pinned ${process.argv[2]}`); process.exit(1); } console.log(p.filename, p.integrity);' "$dir/pack.json" "$2"
+            tar -xzf "$dir/$(node -p 'require(process.argv[1])[0].filename' "$dir/pack.json")" -C "$3" --strip-components=1
+          }
+          fetch @awebai/aw-linux-x64@1.36.26 sha512-GZQaDCx/t/QhBGqjKtCiKWh2uUAZlWeaNA/PaGljLtbYsN8ZDslG0IGXQsMjgam8sjzdztdljAWXbzcRrtjY3g== "$dir/aw"
+          fetch @awebai/oats@0.47.0 sha512-ukh3j5Wtcnsqm5/5BIhq7SX3By5hNRAmKu35HpqPaZhsnQe1gPWs8WVEpXIPkL2fklQud4OozL0WCvxRn9Qa2g== "$dir/oats"
+          (cd "$dir/oats" && npm install --omit=dev --ignore-scripts --no-audit --no-fund)
+          "$dir/aw/bin/aw" version
+          sha256sum "$dir/aw/bin/aw"
+          echo "PINNED_AW=$dir/aw/bin/aw" >> "$GITHUB_ENV"
+          echo "PINNED_OATS=$dir/oats/bin/oats.mjs" >> "$GITHUB_ENV"
+      - name: Folio native contract and materialization, combined package materialization
+        run: |
+          set -euo pipefail
+          FOLIO_AW_BINARY="$PINNED_AW" FOLIO_OATS_ROOT="$(dirname "$(dirname "$PINNED_OATS")")" OATS_APPS_KERNEL="$PINNED_OATS" \
+            node --test --test-reporter=spec --test-reporter-destination=stdout --test-reporter=tap --test-reporter-destination="$RUNNER_TEMP/pinned.tap" \
+            test/folio/native.test.mjs test/folio/materialization.test.mjs test/package/materialization.test.mjs
+          grep -Eqx '# skip(ped)? 0' "$RUNNER_TEMP/pinned.tap" || { echo "a pinned suite skipped"; exit 1; }
+      - name: Library argv preflight
+        run: node test/library/argv-preflight.mjs "$PINNED_AW"
+      - name: Library materialization
+        run: node test/library/materialize.mjs "$PINNED_OATS"

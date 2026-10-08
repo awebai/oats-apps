@@ -11,7 +11,7 @@
   },
   "scripts": {
     "validate": "node scripts/validate.mjs",
-    "check": "node --check scripts/validate.mjs && node --check test/scaffold.test.mjs",
+    "check": "node --check scripts/validate.mjs && node --check test/scaffold.test.mjs && node --check test/package/materialization.test.mjs",
     "test": "npm run validate && npm run check && node --test"
   },
   "devDependencies": {
